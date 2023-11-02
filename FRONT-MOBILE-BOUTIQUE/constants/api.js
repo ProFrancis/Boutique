@@ -5,5 +5,6 @@ export const URL = {
   // PRODUCT
   GET_ALL_PRODUCT: 'http://localhost:8080/api/product/get',
   GET_PRODUCT: 'http://localhost:8080/api/product/get',
-  POST_PRODUCT: 'http://localhost:8080/api/product/post'
+  POST_PRODUCT: 'http://localhost:8080/api/product/post',
+  DELETE_PRODUCT: 'http://localhost:8080/api/product/delete'
 }

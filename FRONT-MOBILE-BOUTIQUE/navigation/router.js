@@ -5,7 +5,7 @@ import {
   SafeAreaView,
   Text,
   View,
-  Image
+  Image,
 } from "react-native";
 
 import { NavigationContainer } from "@react-navigation/native";
@@ -48,31 +48,35 @@ function CustomDrawerContent(props) {
           style={{
             height: 200,
             borderBottomWidth: 1,
-            borderBottomColor: '#f4f4f4',
-            alignItems: 'center',
-            justifyContent: 'center'
+            borderBottomColor: "#f4f4f4",
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
           <Image
             style={{
               width: 130,
-              height: 130
+              height: 130,
             }}
             source={{
               uri: "https://cdn.icon-icons.com/icons2/2643/PNG/512/man_boy_people_avatar_user_person_black_skin_tone_icon_159355.png",
             }}
           />
-          <Text style={{
-            fontWeight: 600,
-            fontSize: 16
-          }}>
+          <Text
+            style={{
+              fontWeight: 600,
+              fontSize: 16,
+            }}
+          >
             {user?.firstname}
           </Text>
-          <Text style={{
-            fontSize: 14,
-            marginTop: 5,
-            color: "#696969"
-          }} >
+          <Text
+            style={{
+              fontSize: 14,
+              marginTop: 5,
+              color: "#696969",
+            }}
+          >
             Utilisateur
           </Text>
         </View>
@@ -97,80 +101,88 @@ export default function AppNavigation() {
       </View>
     );
   }
+  if(user) {
+    return (
+      <NavigationContainer>
+        <Drawer.Navigator
+          drawerContent={(props) => <CustomDrawerContent {...props} />}
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: "#fff",
+            },
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+            drawerStyle: {
+              backgroundColor: "#fff",
+            },
+            // drawerLabelStyle: {
+            //   color: ''
+            // }
+          }}
+        >
+          <Drawer.Screen
+            name="Sneakers"
+            component={TabNavigator}
+            options={{
+              drawerLabel: "Home",
+              title: "Snekers",
+              drawerIcon: () => <Ionicons name="home" size={20} color="gray" />,
+            }}
+          />
+          <Drawer.Screen
+            name="Add"
+            component={Add}
+            options={{
+              drawerLabel: "Add",
+              title: "Add Product",
+              drawerIcon: () => (
+                <Feather name="plus-circle" size={20} color="gray" />
+              ),
+            }}
+          />
+          <Drawer.Screen
+            name="Profil"
+            component={Profil}
+            options={{
+              drawerLabel: "Profil",
+              title: "Profil",
+              drawerIcon: () => <Feather name="user" size={20} color="gray" />,
+            }}
+          />
+          <Drawer.Screen
+            name="Cart"
+            component={Cart}
+            options={{
+              drawerLabel: "Cart",
+              title: "Cart",
+              drawerIcon: () => (
+                <Ionicons name="cart-outline" size={20} color="gray" />
+              ),
+            }}
+          />
+          <Drawer.Screen
+            name="Settings"
+            component={Profil}
+            options={{
+              drawerLabel: "Settings",
+              title: "Settings",
+              drawerIcon: () => (
+                <Feather name="settings" size={20} color="gray" />
+              ),
+            }}
+          />
+        </Drawer.Navigator>
+      </NavigationContainer>
+    );
+  } else {
+    return ( 
+      <NavigationContainer>
+        <AuthStack />
+      </NavigationContainer>
+    )
+  }
 
-  return (
-    <NavigationContainer>
-      <Drawer.Navigator
-        drawerContent={(props) => <CustomDrawerContent {...props} />}
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: "#fff",
-          },
-          headerTitleStyle: {
-            fontWeight: "bold",
-          },
-          drawerStyle: {
-            backgroundColor: "#fff",
-          },
-          // drawerLabelStyle: {
-          //   color: ''
-          // }
-        }}
-      >
-        <Drawer.Screen
-          name="Sneakers"
-          component={TabNavigator}
-          options={{
-            drawerLabel: "Home",
-            title: "Snekers",
-            drawerIcon: () => <Ionicons name="home" size={20} color="gray" />,
-          }}
-        />
-        <Drawer.Screen
-          name="Add"
-          component={Add}
-          options={{
-            drawerLabel: "Add",
-            title: "Add Product",
-            drawerIcon: () => (
-              <Feather name="plus-circle" size={20} color="gray" />
-            ),
-          }}
-        />
-        <Drawer.Screen
-          name="Profil"
-          component={Profil}
-          options={{
-            drawerLabel: "Profil",
-            title: "Profil",
-            drawerIcon: () => <Feather name="user" size={20} color="gray" />,
-          }}
-        />
-        <Drawer.Screen
-          name="Cart"
-          component={Cart}
-          options={{
-            drawerLabel: "Cart",
-            title: "Cart",
-            drawerIcon: () => (
-              <Ionicons name="cart-outline" size={20} color="gray" />
-            ),
-          }}
-        />
-        <Drawer.Screen
-          name="Settings"
-          component={Profil}
-          options={{
-            drawerLabel: "Settings",
-            title: "Settings",
-            drawerIcon: () => (
-              <Feather name="settings" size={20} color="gray" />
-            ),
-          }}
-        />
-      </Drawer.Navigator>
-    </NavigationContainer>
-  );
 }
 
 function TabNavigator() {

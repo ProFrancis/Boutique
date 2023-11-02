@@ -19,9 +19,11 @@ export const productSlice = createSlice({
       draft.loading = false; // Met fin à l'indicateur de chargement de l'opération
       draft.data = action.payload // stock les données reçues de notre API 
     },
-    fetchDetailSucess: (draft, action) => {
-      draft.loading = false; // Met fin à l'indicateur de chargement de l'opération
-      draft.data = action.payload // stock les données reçues de notre API 
+    fetchDeleteSucess: (draft, action) => {
+      draft.loading = false; 
+      const id = action.payload
+
+      draft.data = draft.data.filter(product => product._id !== id )
     },
     // Action pour indicquer l'échec de l'opération.
     fetchFailure: (draft, action) => {
@@ -31,5 +33,5 @@ export const productSlice = createSlice({
   },
 });
 
-export const { fetchStart, fetchSuccess, fetchDetailSucess, fetchFailure }  = productSlice.actions;
+export const { fetchStart, fetchSuccess, fetchDeleteSucess, fetchFailure }  = productSlice.actions;
 export default productSlice.reducer

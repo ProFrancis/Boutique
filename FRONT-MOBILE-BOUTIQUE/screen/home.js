@@ -185,7 +185,7 @@ export default function Home({ navigation }) {
         <Text style={{ fontWeight: "bold" }}>PRODUCT</Text>
         <ScrollView style={{ flex: 1 }} horizontal={true}>
           <FlatList
-            data={articles}
+            data={products}
             keyExtractor={(item) => item._id}
             renderItem={renderItem}
             contentContainerStyle={{ flexDirection: "row" }}
@@ -194,7 +194,7 @@ export default function Home({ navigation }) {
         <Text style={{ fontWeight: "bold" }}>POPULAIRE</Text>
         <ScrollView style={{ flex: 1 }} horizontal={true}>
           <FlatList
-            data={articles}
+            data={products}
             keyExtractor={(item) => item._id}
             renderItem={renderItem}
             contentContainerStyle={{ flexDirection: "row" }}
