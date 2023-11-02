@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import AppNavigation from "./navigation/router";
 import { StatusBar } from "expo-status-bar";
-import { AuthProvider } from "./context/authContext";
+import { AuthProvider } from "./context/AuthContext";
 
 // REDUX
 import store from "./redux";

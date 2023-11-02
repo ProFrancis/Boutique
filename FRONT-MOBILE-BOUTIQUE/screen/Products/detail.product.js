@@ -1,41 +1,148 @@
-import { StyleSheet, Text, View, Image } from "react-native";
-import React, { useEffect } from "react";
-import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-
-// URL
-import { URL } from "../../constants/api";
-
-// ACTIONS
 import {
-  fetchStart,
-  fetchDetailSucess,
-  fetchFailure,
-} from "../../redux/product.slice";
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  SafeAreaView,
+  Pressable,
+} from "react-native";
+import React, { useContext } from "react";
+import { useSelector } from "react-redux";
 
-// SELECTOR 
+// CONTEXT
+import { AuthContext } from "../../context/AuthContext";
+
+// SELECTOR
 import { findProductById } from "../../selector/productSelector";
+
+// Icons
+import Notif from "react-native-vector-icons/Ionicons";
 
 export default function DetailProduct({ route }) {
   const { id } = route.params;
+  const { user } = useContext(AuthContext);
   const product = useSelector((state) => findProductById(state, id));
-  
+
   return (
-    <View>
-      <Image style={styles.img} source={{ uri: product.picture }} />
-      <Text>{product.name}</Text>
-      <Text>{product.description}</Text>
-      <Text>{product.price}</Text>
-      <Text>Like : {product.like}</Text>
-    </View>
+    <SafeAreaView style={styles.root}>
+      {/* BLOCK HEADER */}
+      <View style={styles.flexCenter}>
+        <View style={styles.block__avatar}>
+          <Image
+            style={styles.avatar}
+            source={{
+              uri: "https://cdn.icon-icons.com/icons2/2643/PNG/512/man_boy_people_avatar_user_person_black_skin_tone_icon_159355.png",
+            }}
+          />
+          <View>
+            <Text style={{ fontSize: 12, color: "#696969", marginLeft: 10 }}>
+              Hello {user?.firstname}
+            </Text>
+            <Text style={{ fontSize: 12, fontWeight: 600, marginLeft: 10 }}>
+              What do you need today ?
+            </Text>
+          </View>
+        </View>
+        <View>
+          <Notif size={20} name="notifications-outline" />
+        </View>
+      </View>
+
+      {/* IMG */}
+      <Image
+        style={[styles.img, styles.imagePosition]}
+        source={{ uri: product.picture }}
+        resizeMode="contain"
+      />
+
+      {/* BLOCK AFTER IMAGE  */}
+      <View style={{ paddingHorizontal: 20 }}>
+        <View
+          style={{
+            flex: 1,
+            paddingVertical: 10,
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Image
+              style={{ width: 20, height: 20 }}
+              source={require("../../assets/images/icons/heart.png")}
+            />
+            <Text style={{ fontWeight: 600, marginLeft: 10 }}>
+              {product.like}
+            </Text>
+          </View>
+          <Text style={{ fontWeight: 600, fontSize: 18 }}>{product.name}</Text>
+          <Text style={{ fontWeight: 600 }}>{product.price}$</Text>
+        </View>
+
+        {/* DESCRIPTION */}
+        <Text style={{ fontSize: 20, paddingVertical: 30 }}>
+          {product.description}
+        </Text>
+
+        {/* BUTTON (UPDATE, ADD, DELETE) */}
+        <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
+          <View>
+            <Pressable>
+              <Image
+                style={{ width: 50, height: 50, marginBottom: 5 }}
+                source={require("../../assets/images/icons/refresh.png")}
+              />
+            </Pressable>
+            <Text>Update</Text>
+          </View>
+
+          <View>
+            <Pressable>
+              <Image
+                style={{ width: 50, height: 50, marginBottom: 5 }}
+                source={require("../../assets/images/icons/plus.png")}
+              />
+            </Pressable>
+            <Text>Add Cart</Text>
+          </View>
+
+          <View>
+            <Pressable>
+              <Image
+                style={{ width: 50, height: 50, marginBottom: 5 }}
+                source={require("../../assets/images/icons/remove.png")}
+              />
+            </Pressable>
+            <Text>Delete</Text>
+          </View>
+        </View>
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  root: {},
+  root: {
+    flex: 1,
+    backgroundColor: "#fff",
+  },
+  flexCenter: {
+    marginVertical: 20,
+    paddingHorizontal: 20,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  block__avatar: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  avatar: {
+    width: 28,
+    height: 28,
+  },
   img: {
-    width: 200,
-    height: 150
-  }
+    width: "100%",
+    aspectRatio: 16 / 9,
+    backgroundColor: "#f6F6F6",
+  },
 });
-

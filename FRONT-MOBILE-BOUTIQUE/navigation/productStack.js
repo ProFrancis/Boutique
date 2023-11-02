@@ -11,8 +11,8 @@ const Stack = createNativeStackNavigator();
 
 export default function ProductStack() {
   return (
-    <Stack.Navigator >
-      <Stack.Screen name="List" component={Home} options={{headerShown: false}} />
+    <Stack.Navigator screenOptions={{ headerShown: false}} >
+      <Stack.Screen name="List" component={Home} />
       <Stack.Screen name="Detail_Product" component={DetailProduct} />
     </Stack.Navigator>
   );

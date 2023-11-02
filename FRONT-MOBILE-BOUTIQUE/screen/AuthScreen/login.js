@@ -10,7 +10,7 @@ import {
 import React, { useContext, useState } from "react";
 
 // CONTEXT
-import { AuthContext } from "../../context/authContext";
+import { AuthContext } from "../../context/AuthContext";
 
 // ICONES
 import Entypo from "react-native-vector-icons/Entypo";
@@ -93,7 +93,7 @@ export default function Login() {
         <TouchableOpacity style={styles.mediaButton}>
           <Image
             style={styles.media}
-            source={require("../../assets/icons/google.png")}
+            source={require("../../assets/images/icons/google.png")}
           />
         </TouchableOpacity>
 
@@ -101,7 +101,7 @@ export default function Login() {
         <TouchableOpacity style={styles.mediaButton}>
           <Image
             style={styles.media}
-            source={require("../../assets/icons/x.png")}
+            source={require("../../assets/images/icons/x.png")}
           />
         </TouchableOpacity>
 
@@ -109,7 +109,7 @@ export default function Login() {
         <TouchableOpacity style={styles.mediaButton}>
           <Image
             style={styles.media}
-            source={require("../../assets/icons/facebook.png")}
+            source={require("../../assets/images/icons/facebook.png")}
           />
         </TouchableOpacity>
       </View>

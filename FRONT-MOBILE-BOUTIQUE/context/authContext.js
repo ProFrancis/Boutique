@@ -22,6 +22,7 @@ export const AuthProvider = ({ children }) => {
       const { data, status } = await axios.post(URL.AUTH_SIGN, dataForm);
 
       if (status === 200) {
+        setUser(data)
         // Stockez les données de l'utilisateur dans AsyncStorage (localStorage) pour une utilisation utltérieure/
         await AsyncStorage.setItem("user", JSON.stringify(data));
 
@@ -32,6 +33,13 @@ export const AuthProvider = ({ children }) => {
       console.error(error.message);
       setLoading(false);
     }
+  };
+
+  const logout = () => {
+    setLoading(true);
+    setUser(null);
+    AsyncStorage.removeItem("user");
+    setLoading(false);
   };
 
   // Fonction pour vérifier si un utilisateur est déjà connecté.
@@ -59,7 +67,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ login, isLoading, user }}>
+    <AuthContext.Provider value={{ login, logout, isLoading, user }}>
       {children}
     </AuthContext.Provider>
   );
