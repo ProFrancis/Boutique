@@ -1,5 +1,7 @@
 # Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
 
+BACK-END/.env
+
 # dependencies
 BACK-END/node_modules/
 FRONT-MOBILE/node_modules/
